@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  email        String  @unique
+  password     String
+  organisation String?
+  firstName    String?
+  lastName     String?
+  phoneNumber  String?
+
+  Form         Form[]
+  Report       Report[]
+}
+
+model Answer {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  answerData String[]
+
+  Question   Question   @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  questionId String @db.ObjectId
+}
+
+model Question {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  required Boolean @default(false)
+  type     String
+  question String
+
+  Form   Form   @relation(fields: [formId], references: [id], onDelete: Cascade)
+  formId String @db.ObjectId
+
+  options String[]
+
+  answers Answer[]
+}
+
+model Form {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  active      Boolean @default(true)
+  description String?
+  name        String?
+
+  creator User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String @db.ObjectId
+
+  questions Question[]
+}
+
+model Report {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  description String?
+  name        String?
+
+  creator User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String @db.ObjectId
+
+  blocks Block[]
+}
+
+model Block {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  type     String
+  name     String
+
+  Report   Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  reportId String @db.ObjectId
+}
+

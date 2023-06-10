@@ -1,0 +1,25 @@
+.reportEntry{
+    padding: 5px 10px;
+    margin: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a212d;
+    border-radius: 4px;
+}
+
+.reportEntry:hover{
+    background-color: #1f2a3a;
+}
+
+.buttons{
+    display: flex;
+}
+
+.reportName{
+    display: flex;
+    width: 100%;
+    height: 48px;
+    align-items: center;
+}

@@ -1,0 +1,31 @@
+.buttonOn{
+    background-color: #2b64c2;
+    border: none;
+    margin: 4px 8px;
+    border-radius: 8px;
+    transition: 0.3s;
+
+    width: 40px;
+    height: 40px;
+}
+
+.buttonOff{
+    background-color: #3a4556;
+    border: none;
+    margin: 4px 8px;
+    border-radius: 8px;
+    transition: 0.3s;
+
+    width: 40px;
+    height: 40px;
+}
+
+.buttonOff:hover {background-color: #272e3a;}
+.buttonOn:hover {background-color: #365688;}
+
+.icon{
+    width: 28px;
+    height: 28px;
+    font-weight: 600;
+    padding-top: 4px;
+}
